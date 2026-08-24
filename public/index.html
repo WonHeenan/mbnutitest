@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MB(NU)TI 北师大专属人格测试</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bnu-blue:#2E86C1;--bnu-gold:#E8A52D;--bnu-light:#EEF1F5;--text:#2C3E50;--text-light:#6C7B8D;--card-bg:#F7F9FC;--m-deep:#1B4F72;--m-accent-lt:#D4E4F0;--m-border:#D5DDE6;--accent-coral:#E8715C;--accent-teal:#2BB89F;--accent-purple:#7B6BC4;--accent-rose:#E85D8E}
+body{font-family:'PingFang SC','Microsoft YaHei','Helvetica Neue',sans-serif;background:var(--bnu-light);color:var(--text);overflow-x:hidden}
+/* ===== Welcome — Enhanced ===== */
+#welcome{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem 1.5rem;background:linear-gradient(160deg,#1B4F72 0%,#2E86C1 25%,#23689B 55%,#3FA0D0 100%);color:#F0F4FA;position:relative;overflow:hidden}
+/* Animated glow orbs */
+#welcome::before{content:'';position:absolute;top:-60px;left:-60px;width:350px;height:350px;background:radial-gradient(circle,rgba(232,165,45,0.22) 0%,transparent 70%);border-radius:50%;filter:blur(40px);animation:floatOrb1 8s ease-in-out infinite}
+#welcome::after{content:'';position:absolute;bottom:-100px;right:-100px;width:450px;height:450px;background:radial-gradient(circle,rgba(43,184,159,0.18) 0%,transparent 70%);border-radius:50%;filter:blur(60px);animation:floatOrb2 10s ease-in-out infinite}
+@keyframes floatOrb1{0%,100%{transform:translate(0,0)}50%{transform:translate(30px,20px)}}
+@keyframes floatOrb2{0%,100%{transform:translate(0,0)}50%{transform:translate(-20px,-30px)}}
+/* Floating colorful particles */
+.welcome-particles{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0}
+.welcome-particles span{position:absolute;display:block;border-radius:50%;animation:particleRise linear infinite}
+@keyframes particleRise{0%{transform:translateY(100vh) scale(0);opacity:0}10%{opacity:1}90%{opacity:1}100%{transform:translateY(-10vh) scale(1);opacity:0}}
+.welcome-inner{position:relative;z-index:2;text-align:center;max-width:560px}
+/* BNU 木铎 Crest */
+.bnu-crest{width:130px;height:130px;margin:0 auto 1.2rem;position:relative;animation:crestGlow 3s ease-in-out infinite}
+@keyframes crestGlow{0%,100%{filter:drop-shadow(0 0 8px rgba(232,165,45,0.5))}50%{filter:drop-shadow(0 0 22px rgba(232,165,45,0.8))}}
+.bnu-crest svg{width:100%;height:100%}
+.crest-ring{position:absolute;inset:-8px;border:1px solid rgba(232,165,45,0.35);border-radius:50%;animation:ringPulse 3s ease-in-out infinite}
+.crest-ring.r2{inset:-16px;animation-delay:0.5s;opacity:0.5}
+@keyframes ringPulse{0%,100%{transform:scale(1);opacity:0.3}50%{transform:scale(1.08);opacity:0.6}}
+/* Title — gold gradient text */
+#welcome h1{font-size:2.6rem;margin-bottom:0.3rem;letter-spacing:4px;font-weight:900;background:linear-gradient(135deg,#E8A52D 0%,#FFD060 50%,#E8A52D 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:shimmer 4s ease-in-out infinite}
+@keyframes shimmer{0%,100%{filter:brightness(1)}50%{filter:brightness(1.18)}}
+.subtitle{font-size:0.95rem;color:rgba(255,255,255,0.9);letter-spacing:2px;margin-bottom:0.3rem}
+.motto-tag{font-size:0.75rem;color:rgba(232,165,45,0.85);letter-spacing:3px;margin-bottom:1.5rem}
+/* Intro box */
+.intro-box{background:rgba(255,255,255,0.1);backdrop-filter:blur(12px);border:1px solid rgba(232,165,45,0.3);border-radius:14px;padding:1.4rem;margin-bottom:1.5rem;text-align:left;position:relative;overflow:hidden}
+.intro-box::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:linear-gradient(180deg,#E8A52D,transparent)}
+.intro-box p{font-size:0.85rem;line-height:1.8;opacity:0.92;display:flex;align-items:flex-start;gap:0.5rem;margin-bottom:0.35rem}
+.intro-box p::before{content:'';flex-shrink:0;width:5px;height:5px;background:var(--bnu-gold);border-radius:50%;margin-top:0.55rem;box-shadow:0 0 6px rgba(232,165,45,0.7)}
+.intro-box .tip{color:var(--bnu-gold);font-weight:600;margin-top:0.4rem}
+.intro-box .tip::before{background:#F7F9FC;box-shadow:0 0 6px rgba(255,255,255,0.7)}
+/* Personality preview chips — varied colors */
+.personality-preview{display:flex;flex-wrap:wrap;gap:0.4rem;justify-content:center;margin-bottom:1.8rem;max-width:440px}
+.personality-chip{background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);border-radius:8px;padding:0.3rem 0.65rem;font-size:0.7rem;color:rgba(255,255,255,0.85);transition:all 0.3s;cursor:default}
+.personality-chip:nth-child(1){border-color:rgba(232,165,45,0.45);color:rgba(255,209,96,0.95)}
+.personality-chip:nth-child(2){border-color:rgba(43,184,159,0.45);color:rgba(100,220,200,0.95)}
+.personality-chip:nth-child(3){border-color:rgba(123,107,196,0.45);color:rgba(170,155,230,0.95)}
+.personality-chip:nth-child(4){border-color:rgba(232,113,92,0.45);color:rgba(255,140,120,0.95)}
+.personality-chip:nth-child(5){border-color:rgba(232,93,142,0.45);color:rgba(255,130,170,0.95)}
+.personality-chip:hover{background:rgba(255,255,255,0.18);transform:translateY(-2px)}
+.personality-chip.more{color:rgba(255,255,255,0.5);border-style:dashed}
+/* Start button — colorful gradient */
+.start-btn{display:inline-flex;align-items:center;gap:0.5rem;background:linear-gradient(135deg,#E8A52D 0%,#F0B042 40%,#E8715C 100%);color:#FFFFFF;padding:0.9rem 2.8rem;border:none;border-radius:30px;font-size:1.1rem;font-weight:800;cursor:pointer;transition:all 0.3s;box-shadow:0 6px 25px rgba(232,165,45,0.45),0 0 15px rgba(232,113,92,0.2);position:relative;overflow:hidden}
+.start-btn::before{content:'';position:absolute;top:50%;left:50%;width:0;height:0;border-radius:50%;background:rgba(255,255,255,0.25);transform:translate(-50%,-50%);transition:width 0.6s,height 0.6s}
+.start-btn:hover{transform:translateY(-3px);box-shadow:0 8px 35px rgba(232,165,45,0.6),0 0 20px rgba(232,113,92,0.3)}
+.start-btn:hover::before{width:350px;height:350px}
+.start-btn span{position:relative;z-index:1}
+/* Stats info */
+/* Quiz */
+#quiz{display:none;min-height:100vh;background:var(--bnu-light)}
+.quiz-header{background:var(--bnu-blue);color:#F0F4FA;padding:1rem 1.5rem;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(46,134,193,0.25)}
+.quiz-header-inner{max-width:600px;margin:0 auto}
+.progress-row{display:flex;align-items:center;gap:1rem}
+.progress-text{font-size:0.85rem;white-space:nowrap;opacity:0.85}
+.progress-bar-wrap{flex:1;height:6px;background:rgba(255,255,255,0.2);border-radius:3px;overflow:hidden}
+.progress-bar-fill{height:100%;background:linear-gradient(90deg,#E8A52D,#FFD060);border-radius:3px;transition:width 0.4s ease;width:0}
+.quiz-container{max-width:600px;margin:0 auto;padding:2rem 1.5rem}
+.q-dimension-tag{display:inline-block;background:var(--bnu-blue);color:#FFD060;padding:0.25rem 0.75rem;border-radius:20px;font-size:0.72rem;font-weight:600;margin-bottom:1rem}
+.q-number{font-size:0.8rem;color:var(--text-light);margin-bottom:0.3rem}
+.q-text{font-size:1.1rem;font-weight:600;line-height:1.6;margin-bottom:1.5rem;color:var(--text)}
+.options-list{display:flex;flex-direction:column;gap:0.7rem}
+.option-card{background:var(--card-bg);border:2px solid var(--m-border);border-radius:10px;padding:0.85rem 1.1rem;cursor:pointer;transition:all 0.25s;font-size:0.9rem;line-height:1.5}
+.option-card:hover{border-color:var(--bnu-blue);background:#EDF1F7}
+.option-card.selected{border-color:var(--bnu-blue);background:#E0EAF4}
+.option-label{display:inline-block;width:26px;height:26px;line-height:26px;text-align:center;border-radius:50%;background:var(--bnu-blue);color:#F0F4FA;font-weight:700;font-size:0.75rem;margin-right:0.6rem;vertical-align:middle}
+.option-card.selected .option-label{background:var(--bnu-gold);color:#FFFFFF}
+.quiz-nav{display:flex;justify-content:space-between;margin-top:1.8rem}
+.nav-btn{padding:0.6rem 1.5rem;border-radius:25px;border:none;font-size:0.9rem;font-weight:600;cursor:pointer;transition:all 0.2s}
+.nav-prev{background:var(--m-border);color:var(--text-light)}
+.nav-prev:hover{background:#C5D0DD}
+.nav-next{background:var(--bnu-blue);color:#F0F4FA}
+.nav-next:hover{background:#23689B}
+.nav-btn:disabled{opacity:0.4;cursor:not-allowed}
+/* Loading */
+#loading{display:none;min-height:100vh;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(160deg,#1B4F72 0%,#2E86C1 100%);color:#F0F4FA;position:fixed;inset:0;z-index:999}
+.spinner{width:60px;height:60px;border:4px solid rgba(232,165,45,0.2);border-top-color:var(--bnu-gold);border-right-color:var(--accent-teal);border-radius:50%;animation:spin 1s linear infinite;margin-bottom:1.5rem}
+@keyframes spin{to{transform:rotate(360deg)}}
+#loading p{font-size:1.1rem;opacity:0.85;animation:fadePulse 1.5s ease-in-out infinite}
+@keyframes fadePulse{0%,100%{opacity:0.4}50%{opacity:0.9}}
+/* Result */
+#result{display:none;min-height:100vh;background:var(--bnu-light)}
+.result-hero{background:linear-gradient(135deg,#2E86C1 0%,#23689B 50%,#1B4F72 100%);color:#F0F4FA;padding:2.5rem 1.5rem 2rem;text-align:center;position:relative;overflow:hidden}
+.result-hero::before{content:'';position:absolute;top:-30px;right:-30px;width:200px;height:200px;background:radial-gradient(circle,rgba(232,165,45,0.18) 0%,transparent 70%);border-radius:50%;filter:blur(40px)}
+.result-hero::after{content:'';position:absolute;bottom:-50px;left:-50px;width:180px;height:180px;background:radial-gradient(circle,rgba(43,184,159,0.15) 0%,transparent 70%);border-radius:50%;filter:blur(35px)}
+.congrats-line{font-size:1rem;color:var(--bnu-gold);margin-bottom:0.5rem;font-weight:600}
+.hero-portrait{position:relative;width:160px;height:160px;margin:0 auto 0.8rem;display:flex;align-items:center;justify-content:center;z-index:1}
+.hero-portrait .ink-blob{position:absolute;inset:-12%;width:124%;height:124%;z-index:0}
+.hero-portrait .ink-blob svg{width:100%;height:100%}
+.hero-portrait img{position:relative;z-index:1;width:78%;height:78%;object-fit:contain}
+.personality-code{font-size:2.8rem;font-weight:900;letter-spacing:4px;margin-bottom:0.3rem;color:#FFFFFF;text-shadow:0 2px 10px rgba(0,0,0,0.2)}
+.personality-name{font-size:1.3rem;color:var(--bnu-gold);font-weight:700;letter-spacing:2px}
+.result-body{max-width:620px;margin:0 auto;padding:1.5rem}
+.section-card{background:var(--card-bg);border:1px solid var(--m-border);border-radius:14px;padding:1.4rem;margin-bottom:1rem;box-shadow:0 3px 15px rgba(27,79,114,0.08)}
+.section-title{font-size:0.9rem;font-weight:700;color:var(--bnu-blue);margin-bottom:0.8rem;display:flex;align-items:center;gap:0.4rem}
+.section-title::before{content:'';display:inline-block;width:4px;height:16px;background:var(--bnu-gold);border-radius:2px}
+.dim-row{margin-bottom:0.85rem}
+.dim-row:last-child{margin-bottom:0}
+.dim-label{display:flex;justify-content:space-between;font-size:0.78rem;font-weight:600;margin-bottom:0.3rem}
+.dim-bar-bg{height:22px;background:#E0E8F0;border-radius:11px;overflow:hidden;display:flex}
+.dim-bar-left{height:100%;background:var(--bnu-blue);display:flex;align-items:center;justify-content:center;font-size:0.68rem;color:#FFFFFF;font-weight:700;transition:width 1s ease}
+.dim-bar-right{height:100%;background:var(--bnu-gold);display:flex;align-items:center;justify-content:center;font-size:0.68rem;color:#FFFFFF;font-weight:700;transition:width 1s ease}
+.ink-portrait{position:relative;display:flex;align-items:center;justify-content:center;width:180px;height:180px;margin:0 auto 1rem}
+.ink-portrait .ink-blob{position:absolute;inset:-10%;width:120%;height:120%;z-index:0}
+.ink-portrait .ink-blob svg{width:100%;height:100%}
+.ink-portrait img{position:relative;z-index:1;width:80%;height:80%;object-fit:contain}
+.ink-portrait.modal-img{width:140px;height:140px;margin-bottom:0.6rem}
+.desc-text{font-size:0.9rem;line-height:1.75;color:#3D5066}
+.intro-text{font-size:0.88rem;line-height:1.8;color:#5A6B7E}
+.intro-text p{margin-bottom:0.7rem}
+.intro-text p:last-child{margin-bottom:0}
+.gallery-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(135px,1fr));gap:0.6rem}
+.gallery-item{background:var(--card-bg);border:1.5px solid var(--m-border);border-radius:8px;padding:0.7rem 0.5rem;text-align:center;cursor:pointer;transition:all 0.2s}
+.gallery-item:hover{border-color:var(--bnu-blue);background:#EDF1F7}
+.gallery-code{font-size:0.78rem;font-weight:800;color:var(--bnu-blue);letter-spacing:1px}
+.gallery-name{font-size:0.7rem;color:var(--text-light);margin-top:0.15rem}
+.gallery-item.current{border-color:var(--bnu-gold);background:#FFF8E8}
+.gallery-item.current .gallery-code{color:var(--bnu-gold)}
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(27,79,114,0.5);z-index:200;align-items:center;justify-content:center;padding:1.5rem}
+.modal-card{background:#F7F9FC;border:1px solid var(--m-border);border-radius:14px;max-width:480px;width:100%;padding:1.5rem;max-height:80vh;overflow-y:auto;box-shadow:0 10px 40px rgba(27,79,114,0.2)}
+.modal-code{font-size:1.4rem;font-weight:900;color:var(--bnu-blue);letter-spacing:2px;text-align:center}
+.modal-name{font-size:0.95rem;color:var(--bnu-gold);text-align:center;font-weight:600;margin:0.2rem 0 0.8rem}
+.modal-desc{font-size:0.85rem;line-height:1.7;color:#3D5066}
+.modal-close{display:block;margin:1rem auto 0;background:var(--bnu-blue);color:#F0F4FA;border:none;padding:0.5rem 1.5rem;border-radius:20px;font-size:0.85rem;cursor:pointer}
+.share-box{display:flex;gap:0.8rem;justify-content:center;margin-top:1rem}
+.share-btn{padding:0.6rem 1.3rem;border-radius:25px;border:none;font-size:0.85rem;font-weight:600;cursor:pointer;transition:all 0.2s}
+.share-copy{background:linear-gradient(135deg,#E8A52D,#F0B042);color:#FFFFFF}
+.share-copy:hover{background:linear-gradient(135deg,#D4992A,#E0A038)}
+.share-retry{background:var(--card-bg);border:2px solid var(--bnu-blue);color:var(--bnu-blue)}
+.share-retry:hover{background:var(--bnu-light)}
+/* Share modal — 人格卡片（可截图保存） */
+.share-modal{display:none;position:fixed;inset:0;background:rgba(27,79,114,0.6);z-index:300;align-items:center;justify-content:center;padding:1.5rem;backdrop-filter:blur(4px)}
+.share-card{background:linear-gradient(135deg,#2E86C1 0%,#23689B 50%,#1B4F72 100%);color:#F0F4FA;border-radius:20px;max-width:380px;width:100%;padding:1.8rem 1.5rem 1.5rem;text-align:center;position:relative;box-shadow:0 20px 60px rgba(27,79,114,0.4);animation:pop 0.3s ease}
+@keyframes pop{from{transform:scale(0.85);opacity:0}to{transform:scale(1);opacity:1}}
+.share-card::before{content:'';position:absolute;top:-40px;right:-40px;width:160px;height:160px;background:radial-gradient(circle,rgba(232,165,45,0.22) 0%,transparent 70%);border-radius:50%;filter:blur(30px)}
+.share-card::after{content:'';position:absolute;bottom:-30px;left:-30px;width:120px;height:120px;background:radial-gradient(circle,rgba(43,184,159,0.18) 0%,transparent 70%);border-radius:50%;filter:blur(30px)}
+.share-card .brand{font-size:0.7rem;letter-spacing:3px;color:var(--bnu-gold);margin-bottom:1rem;font-weight:600;position:relative;z-index:1}
+.share-card .portrait{position:relative;z-index:1;margin:0 auto 1rem;width:180px;height:180px;display:flex;align-items:center;justify-content:center}
+.share-card .portrait .ink-blob{position:absolute;inset:-12%;width:124%;height:124%;z-index:0}
+.share-card .portrait .ink-blob svg{width:100%;height:100%}
+.share-card .portrait img{position:relative;z-index:1;width:78%;height:78%;object-fit:contain}
+.share-card .code{font-size:2.6rem;font-weight:900;letter-spacing:6px;color:#FFFFFF;margin:0.5rem 0 0.2rem;position:relative;z-index:1;text-shadow:0 2px 8px rgba(0,0,0,0.3)}
+.share-card .name{font-size:1.3rem;color:var(--bnu-gold);font-weight:700;letter-spacing:2px;position:relative;z-index:1;margin-bottom:0.6rem}
+.share-card .group-tag{display:inline-block;background:rgba(232,165,45,0.2);border:1px solid var(--bnu-gold);padding:0.2rem 0.8rem;border-radius:20px;font-size:0.7rem;color:var(--bnu-gold);margin-bottom:0.8rem;position:relative;z-index:1}
+.share-card .desc{font-size:0.78rem;line-height:1.6;opacity:0.92;position:relative;z-index:1;margin:0.5rem 0 1rem;padding:0 0.5rem}
+.share-card .footer-row{position:relative;z-index:1;border-top:1px dashed rgba(232,165,45,0.4);padding-top:0.8rem;margin-top:0.5rem;font-size:0.65rem;opacity:0.7;letter-spacing:1px}
+.share-card .footer-row .motto{color:var(--bnu-gold);font-weight:600;font-size:0.78rem;margin-bottom:0.2rem;letter-spacing:3px}
+.share-modal-actions{display:flex;flex-wrap:wrap;gap:0.6rem;margin-top:1rem;position:relative;z-index:2}
+.share-modal-actions button{flex:1;padding:0.6rem 0;border:none;border-radius:25px;font-size:0.85rem;font-weight:600;cursor:pointer;transition:all 0.2s}
+.share-modal-save{background:linear-gradient(135deg,#E8A52D,#F0B042);color:#FFFFFF}
+.share-modal-save:hover{background:linear-gradient(135deg,#D4992A,#E0A038)}
+.share-modal-close{background:#F7F9FC;color:var(--bnu-blue)}
+.share-modal-close:hover{background:#E0E8F0}
+.share-hint{text-align:center;color:rgba(255,255,255,0.7);font-size:0.75rem;margin-top:0.8rem;position:relative;z-index:2}
+/* GAGA 彩蛋卡片 */
+.gaga-card{background:linear-gradient(135deg,#F7F9FC 0%,#F0EEF8 100%);border:2px solid var(--accent-purple);position:relative;overflow:hidden}
+.gaga-card::before{content:'';position:absolute;top:-30px;right:-30px;width:120px;height:120px;background:radial-gradient(circle,rgba(123,107,196,0.18) 0%,transparent 70%);border-radius:50%;filter:blur(30px)}
+.gaga-card::after{content:'';position:absolute;bottom:-20px;left:-20px;width:100px;height:100px;background:radial-gradient(circle,rgba(232,165,45,0.15) 0%,transparent 70%);border-radius:50%;filter:blur(25px)}
+.gaga-badge{display:inline-block;background:linear-gradient(135deg,var(--accent-purple),#9A8BD8);color:#FFFFFF;font-size:0.65rem;font-weight:700;padding:0.25rem 0.7rem;border-radius:20px;margin-bottom:0.8rem;position:relative;z-index:1;letter-spacing:1px}
+.gaga-portrait{position:relative;width:150px;height:150px;margin:0 auto 0.8rem;display:flex;align-items:center;justify-content:center;z-index:1}
+.gaga-portrait .ink-blob{position:absolute;inset:-12%;width:124%;height:124%;z-index:0}
+.gaga-portrait .ink-blob svg{width:100%;height:100%}
+.gaga-portrait img{position:relative;z-index:1;width:78%;height:78%;object-fit:contain}
+.gaga-title{font-size:1.5rem;font-weight:900;color:var(--accent-purple);text-align:center;letter-spacing:3px;margin-bottom:0.3rem;position:relative;z-index:1}
+.gaga-desc{font-size:0.8rem;color:var(--text-light);text-align:center;line-height:1.7;position:relative;z-index:1;padding:0 0.5rem}
+.footer{text-align:center;padding:1.2rem;font-size:0.7rem;color:var(--text-light)}
+.footer-motto{color:var(--bnu-blue);font-weight:600;font-size:0.8rem;letter-spacing:3px;margin-bottom:0.3rem}
+@media(max-width:500px){
+#welcome h1{font-size:1.9rem}
+.bnu-crest{width:100px;height:100px}
+.personality-preview{max-width:320px}
+.personality-chip{font-size:0.65rem;padding:0.25rem 0.5rem}
+.personality-code{font-size:2.2rem}
+.q-text{font-size:1.02rem}
+.option-card{font-size:0.82rem}
+.start-btn{font-size:1rem;padding:0.8rem 2.2rem}
+}
+</style>
+</head>
+<body>
+<!-- SVG ink splash filter definition -->
+<svg width="0" height="0" style="position:absolute;pointer-events:none" aria-hidden="true">
+<defs>
+<filter id="inkSplash">
+<feTurbulence type="fractalNoise" baseFrequency="0.012" numOctaves="4" seed="3" result="noise"/>
+<feDisplacementMap in="SourceGraphic" in2="noise" scale="28" xChannelSelector="R" yChannelSelector="G"/>
+</filter>
+</defs>
+</svg>
+
+<!-- ============ 欢迎页 — Enhanced ============ -->
+<div id="welcome">
+<!-- Floating colorful particles -->
+<div class="welcome-particles" id="particles"></div>
+<div class="welcome-inner">
+<!-- BNU 木铎 Crest (SVG) -->
+<div class="bnu-crest">
+<div class="crest-ring"></div>
+<div class="crest-ring r2"></div>
+<svg viewBox="0 0 130 130" xmlns="http://www.w3.org/2000/svg">
+<circle cx="65" cy="65" r="62" fill="none" stroke="#E8A52D" stroke-width="1.5" opacity="0.5"/>
+<circle cx="65" cy="65" r="56" fill="none" stroke="#E8A52D" stroke-width="0.8" opacity="0.3"/>
+<g transform="translate(65,62)">
+<!-- Bell top knob -->
+<line x1="0" y1="-48" x2="0" y2="-40" stroke="#E8A52D" stroke-width="2" stroke-linecap="round"/>
+<circle cx="0" cy="-44" r="4" fill="none" stroke="#E8A52D" stroke-width="1.5"/>
+<!-- Bell body -->
+<path d="M-20,-38 Q-20,-42 -15,-42 L15,-42 Q20,-42 20,-38 L20,6 Q20,12 16,16 L-16,16 Q-20,12 -20,6 Z" fill="rgba(232,165,45,0.15)" stroke="#E8A52D" stroke-width="2"/>
+<!-- Bell mouth -->
+<path d="M-16,16 L16,16 L18,22 L-18,22 Z" fill="rgba(232,165,45,0.3)" stroke="#E8A52D" stroke-width="1.5"/>
+<!-- Wooden clapper (木铎) -->
+<rect x="-3.5" y="-22" width="7" height="26" rx="2.5" fill="#E8A52D" opacity="0.85"/>
+<rect x="-5" y="-26" width="10" height="6" rx="2" fill="#E8A52D"/>
+<!-- Decorative line -->
+<line x1="-14" y1="-30" x2="14" y2="-30" stroke="#E8A52D" stroke-width="1" opacity="0.5"/>
+<line x1="-14" y1="-8" x2="14" y2="-8" stroke="#E8A52D" stroke-width="0.8" opacity="0.3"/>
+</g>
+<!-- Ring text -->
+<text x="65" y="104" text-anchor="middle" fill="#E8A52D" font-size="9" font-weight="700" letter-spacing="3" opacity="0.9">BNU</text>
+<text x="65" y="116" text-anchor="middle" fill="#E8A52D" font-size="6" letter-spacing="2" opacity="0.5">1902</text>
+</svg>
+</div>
+<h1>MB(NU)TI</h1>
+<p class="subtitle">北师大专属人格测试</p>
+<p class="motto-tag">学为人师 · 行为世范</p>
+<div class="intro-box">
+<p>纯娱乐 · 不科学 · 扎心不负责</p>
+<p>共 13 道题，凭第一直觉选最符合的</p>
+<p>做完可算出 4 个维度的人格占比，精准定位你在师大的「bnu浓度」</p>
+<p class="tip">选好了就别改，第一直觉最准</p>
+</div>
+<div class="personality-preview">
+<span class="personality-chip">DEAN 励耘话事人</span>
+<span class="personality-chip">FOX! 精算王</span>
+<span class="personality-chip">AOWU 独狼</span>
+<span class="personality-chip">HOST 人脉王</span>
+<span class="personality-chip">CROW 乌鸦精</span>
+<span class="personality-chip more">...共16种</span>
+</div>
+<button class="start-btn" onclick="startQuiz()"><span>开始测试 &rarr;</span></button>
+</div>
+</div>
+
+<!-- ============ 答题页 ============ -->
+<div id="quiz">
+<div class="quiz-header">
+<div class="quiz-header-inner">
+<div class="progress-row">
+<span class="progress-text" id="progressText">1 / 12</span>
+<div class="progress-bar-wrap"><div class="progress-bar-fill" id="progressBar"></div></div>
+</div>
+</div>
+</div>
+<div class="quiz-container" id="quizContainer"></div>
+</div>
+
+<!-- ============ 提交中 ============ -->
+<div id="loading">
+<div class="spinner"></div>
+<p>正在分析你的师大浓度...</p>
+</div>
+
+<!-- ============ 结果页 ============ -->
+<div id="result">
+<div class="result-hero">
+<div class="congrats-line" id="congratsLine"></div>
+<div class="hero-portrait" id="heroPortrait"><svg class="ink-blob" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><g filter="url(#inkSplash)"><circle cx="60" cy="58" r="40" fill="#E8A52D" opacity="0.88"/><circle cx="103" cy="22" r="6" fill="#E8A52D" opacity="0.6"/><circle cx="14" cy="96" r="5" fill="#E8A52D" opacity="0.55"/><circle cx="109" cy="82" r="3.5" fill="#E8A52D" opacity="0.5"/><circle cx="22" cy="18" r="3" fill="#E8A52D" opacity="0.45"/></g></svg><img id="heroPortraitImg" src="" alt="人格画像"></div>
+<div class="personality-code" id="pCode"></div>
+<div class="personality-name" id="pName"></div>
+</div>
+<div class="result-body">
+<div id="gagaSection"></div>
+<div class="section-card">
+<div class="section-title">维度分析</div>
+<div id="dimBars"></div>
+</div>
+<div class="section-card">
+<div class="section-title">扎心解读</div>
+<p class="desc-text" id="descText"></p>
+</div>
+<div class="section-card">
+<div class="section-title">人物介绍</div>
+<div class="intro-text" id="introText"></div>
+</div>
+<div class="section-card">
+<div class="section-title">16种师大人格图鉴</div>
+<p style="font-size:0.78rem;color:var(--text-light);margin-bottom:0.8rem">点击查看其他人格类型</p>
+<div class="gallery-grid" id="galleryGrid"></div>
+</div>
+<div class="share-box">
+<button class="share-btn share-copy" onclick="shareResult()">分享结果</button>
+<button class="share-btn share-retry" onclick="retry()">重新测试</button>
+</div>
+<div class="footer">
+<div class="footer-motto">学为人师 · 行为世范</div>
+<p>北京师范大学 · MB(NU)TI · 纯娱乐测试</p>
+<p>测试网页由AI辅助完成，如有建议可告知，创作者不一定接受，祝大家生活愉快！</p>
+</div>
+</div>
+</div>
+
+<!-- ============ 人格详情弹窗 ============ -->
+<div class="modal-overlay" id="modal" onclick="if(event.target===this)closeModal()">
+<div class="modal-card">
+<div class="modal-code" id="modalCode"></div>
+<div class="modal-name" id="modalName"></div>
+<div class="modal-desc" id="modalDesc"></div>
+<button class="modal-close" onclick="closeModal()">关闭</button>
+</div>
+</div>
+
+<!-- ============ 分享结果卡片弹窗 ============ -->
+<div class="share-modal" id="shareModal" onclick="if(event.target===this)closeShareModal()">
+<div style="display:flex;flex-direction:column;align-items:center;max-width:380px;width:100%">
+<div class="share-card" id="shareCard">
+<div class="brand">MB(NU)TI · 我的师大浓度</div>
+<div class="portrait"><svg class="ink-blob" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><g filter="url(#inkSplash)"><circle cx="60" cy="58" r="40" fill="#E8A52D" opacity="0.88"/><circle cx="103" cy="22" r="6" fill="#E8A52D" opacity="0.6"/><circle cx="14" cy="96" r="5" fill="#E8A52D" opacity="0.55"/><circle cx="109" cy="82" r="3.5" fill="#E8A52D" opacity="0.5"/><circle cx="22" cy="18" r="3" fill="#E8A52D" opacity="0.45"/></g></svg><img id="sharePortrait" src="" alt="人格画像"></div>
+<div class="code" id="shareCode"></div>
+<div class="name" id="shareName"></div>
+<div class="group-tag" id="shareGroup"></div>
+<div class="desc" id="shareDesc"></div>
+<div class="footer-row">
+<div class="motto">学为人师 · 行为世范</div>
+<div>BNU · 北京师范大学</div>
+</div>
+</div>
+<div class="share-modal-actions">
+<button class="share-modal-save" onclick="downloadShareCard()">下载卡片图片</button>
+<button class="share-modal-close" onclick="copyShareText()" style="background:transparent;color:rgba(255,255,255,0.9);border:2px solid rgba(255,255,255,0.8)">复制文案</button>
+<button class="share-modal-close" onclick="closeShareModal()">关闭</button>
+</div>
+<div class="share-hint">长按或截图保存到相册 · 转发给朋友</div>
+</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<script>
+// ==================== 题库 ====================
+const questions = [
+{text:"早八课闹钟响了，距离上课还有10分钟，你第一反应是？",dim:0,
+opts:["弹起来穿衣洗漱 5 分钟搞定，拎着包子百米冲刺赶签到，主打一个全勤战神","挣扎着爬起来洗把脸就出门，迟到几分钟没事，赶上点名就行","翻个身按掉闹钟，先睡 10 分钟再说，大不了扣平时分","直接把闹钟关了继续睡，课后找个理由请假"]},
+{text:"老师布置3000字课程论文，你会怎么做？",dim:1,
+opts:["查 10 篇文献反复打磨，主动写到 5000 字，奔着 95+ 卷死同学","认真找资料写框架，凑够字数再润色一下，争取拿个良好","东拼西凑凑够字数，格式调对就行，及格万岁","截止前一天才想起，复制粘贴改改重复率，交了就完事"]},
+{text:"校园路上远远看到半熟不熟的同班同学，你会？",dim:2,
+opts:["大步迎上去打招呼，顺路唠一路食堂新菜，聊到教室才分开","笑着点个头打个招呼，然后各走各的","立刻低头刷手机，假装没看见，祈祷对方别注意到自己","直接掉头绕路走，宁可多走 500 米也不想尴尬搭话"]},
+{text:"小组作业遇到队友全程划水，临交稿说自己不会，你会？",dim:3,
+opts:["二话不说把他那份也做了，干完拉倒，内耗纯属浪费时间","吐槽两句然后自己补上，虽然不爽但也不往心里去","越想越气，活也干不进去，先和朋友吐槽八百字","气到睡不着，连夜脑补怎么对峙，第二天见面又不敢说"]},
+{text:"周四玩到凌晨两点，第二天早上八点有课，你会？",dim:0,
+opts:["定三个连环闹钟，爬也要爬去教室，全勤人设不能崩","定个闹钟，能起就去，起不来就算了","直接把闹钟关了，让室友帮忙答个到","啥课？不知道，睡醒再说，天塌下来也不能耽误睡觉"]},
+{text:"期末复习周，你的日常状态是？",dim:1,
+opts:["七点准时到图书馆占座，学到闭馆，复习计划精确到每一章","上午九点到馆，学累了就歇，按部就班过完知识点","中午才起床，下午学俩小时就玩手机，主打一个陪伴","考前一晚才打开 PPT，生死有命富贵在天，能过多少算多少"]},
+{text:"社团/班级聚餐，你在桌上的状态是？",dim:2,
+opts:["全场气氛组，挨个碰杯唠嗑，一圈下来加了好几个微信","和熟悉的朋友聊天，偶尔跟着笑两声","找个角落埋头干饭，有人搭话就笑一笑","全程玩手机，巴不得赶紧结束回宿舍"]},
+{text:"选课系统崩了，大家都在抢课，你会？",dim:3,
+opts:["淡定放着刷新，反正早晚能进去，大不了捡漏，急也没用","刷几次进不去就先去等着，过会儿再试","一边疯狂点鼠标一边吐槽","越刷越崩溃，担心抢不到水课挂科"]},
+{text:"第一节课老师突然说要点名，你还在床上，你会？",dim:0,
+opts:["立刻穿鞋往教室冲，哪怕迟到也要赶在点名结束前到","飞速洗漱，一边跑一边让室友先帮着喊个到","发消息问室友点到哪了，赶不上就算了","点就点吧，翻个身继续睡，一次点名而已"]},
+{text:"出成绩了，你考了85分，第一反应是？",dim:1,
+opts:["完了，绩点又拉低了，赶紧算排名","有点低，看看哪里扣了分，下次再努努力","可以啊，没挂还挺高，奖励自己一顿KFC","居然没挂？赚了赚了"]},
+{text:"在学16小花园喂猫，旁边有个陌生同学也在喂，你会？",dim:2,
+opts:["主动搭话聊猫，互相安利猫粮，转头就多了一个朋友","笑着对视一下，各喂各的","默默撸自己的猫，假装没看见对方","默默路过，假装什么也没发生"]},
+{text:"导师突然发微信问你「在吗」，你第一反应是？",dim:3,
+opts:["秒回「老师我在」，直接问有什么事，兵来将挡水来土掩","先看看手头有没有没做完的活，没问题就回","心里咯噔一下，先琢磨半小时他找我啥事，再慢慢回","吓得手机都差点扔了，疯狂复盘最近有没有摸鱼，半天不敢回"]},
+{text:"您在校园里是否被乌鸦的恩赐击中过？",dim:-1,
+opts:["是","否"]}
+];
+
+const dimNames=[
+{left:"Z",leftLabel:"早八冲锋",right:"C",rightLabel:"长眠摆烂",name:"早八力"},
+{left:"J",leftLabel:"绩点拉满",right:"S",rightLabel:"成绩随缘",name:"学业力"},
+{left:"N",leftLabel:"社交达人",right:"D",rightLabel:"社恐独狼",name:"社交力"},
+{left:"W",leftLabel:"情绪稳定",right:"E",rightLabel:"日常内耗",name:"精神力"}
+];
+
+// ==================== 人格数据 ====================
+const personalities = {
+"ZJNW":{code:"DEAN",name:"励耘话事人",group:"卷王冲锋组",image:"/images/dean.png",
+desc:"师大标准六边形战士，保研名单提前预定，老师爱同学服，属于现实里开了挂的人",
+intro:"<p>DEAN 是师大校园里的隐形秩序制定者，绩点、学生工作、社交人脉全线拉满，保研路径、活动方案、时间规划分毫不差。他们的日程表就是团队的行动纲领，他们的一句 \u201c放心\u201d 就是所有人的定心丸。</p><p>DEAN 的世界里没有突发状况，只有未被预案覆盖的变量。他们是励耘精神的具象化身，是人群中自带气场的掌舵人，不必高声发号施令，周身就散发着 \u201c这事交给他稳了\u201d 的可靠气场。旁人只惊叹于他们的游刃有余，却没看见他们早已把前路的每一步都算得清清楚楚。</p>"},
+"ZJNE":{code:"FOX!",name:"积水潭精算王",group:"卷王冲锋组",image:"/images/fox.png",
+desc:"卷得比谁都狠，焦虑也比谁都多，脑子里天天自己和自己开庭算绩点排名",
+intro:"<p>FOX!是积水潭畔的人形计算器，每一分平时分、每一次作业评级、每门课的绩点权重都刻在脑子里，保研名额的警戒线比谁都清楚。表面上云淡风轻跟着说笑，内心的算盘早已打得噼啪作响。</p><p>FOX 的大脑是永不停歇的精算系统，看似擅长权衡利弊，内心却藏着一份极高的期待。对待在意的人和事，会默默在心里设置清晰的标尺，观察、打分、衡量适配度。不会轻易交付信任，一旦认定，便会拿出十足的诚意，只是这份真心往往裹着理性的外壳，不擅长直白热烈地袒露。</p>"},
+"ZJDW":{code:"AOWU",name:"后主楼独狼",group:"卷王冲锋组",image:"/images/aowu.png",
+desc:"图书馆常驻钉子户，话少分高，常年霸占专业前几名，没人知道他什么时候偷偷学的",
+intro:"<p>AOWU是校园里行踪隐秘的孤狼，上课选最角落的位置，吃饭走最僻静的路线，图书馆的座位常年固定，连进出都刻意避开人流高峰。话很少，很神秘，没人见过他们熬夜刷题的样子，也没人摸清过他们的进度，直到成绩公布，才发现他们稳稳占据专业前列。</p><p>AOWU的独处不是孤僻，而是专属结界。他们在自己的节奏里安静发力，情绪稳定，目标清晰，不必迎合，不必寒暄，把所有精力都收拢在自己的道路上。人群的喧闹与他们无关，后主楼的窗外景色、书页翻动的声响，就是他们最安心的领地。</p>"},
+"ZJDE":{code:":((",name:"银杏EMO怪",group:"卷王冲锋组",image:"/images/emo.png",
+desc:"一边泡馆刷题到深夜，一边坐在教二草坪伤感落叶，卷并痛苦着是人生常态",
+intro:"<p>:( (是京师校园里行走的短句，一边在图书馆刷题到深夜，一边为一阵风、一片落叶、一个黄昏陷入绵长的情绪。朋友圈里是精修的校园景致配着软乎乎的文艺句子，没人知道屏幕背后的他们为时光流逝轻轻叹气。</p><p>:( (的世界永远有两层：一层是埋头赶路的现实，绩点、作业、考试一步都不肯落下；一层是漫无边界的心绪，春日飞絮、秋日落叶、夏夜的风都能激起涟漪。卷得用力，也感怀得认真，在兵荒马乱的学业里，守着自己那片柔软又细碎的诗意。</p>"},
+"ZSNW":{code:"HOST",name:"鸦马路人脉王",group:"卷王冲锋组",image:"/images/host.png",
+desc:"不卷绩点卷人脉，混迹各种社团，列表永远99+，上学主打一个积累人脉+享受生活",
+intro:"<p>HOST是京师校园里的天然东道主，社团招新有他们的身影，班级聚餐有他们的张罗，杏坛路的饭桌上永远有他们的位置。微信列表 99+，半数都是点头之交的人脉，成绩向来随缘，从不为几分绩点内耗，上学主打一个广结善缘、享受生活。</p><p>HOST 的世界里没有尴尬的冷场，也没有解不开的僵局。他们心态松弛得像春日的风，走到哪里就把热络的气氛带到哪里，不必卷到顶尖，却总能靠好人缘把路走得宽阔顺畅。对他们而言，大学不止有书本里的知识，更有一张张鲜活的面孔，和一场场热气腾腾的相逢。</p>"},
+"ZSNE":{code:"XSWL",name:"京师点子王",group:"卷王冲锋组",image:"/images/xswl.png",
+desc:"哪里有热闹哪里就有他，天天乐呵呵的，成绩不重要，开心最重要，班级气氛组组长",
+intro:"<p>XSWL是京师校园里行走的快乐喷泉，班级群里的梗王，聚餐桌上的气氛发动机，哪里有热闹哪里就有他们的身影。上课准点到，成绩及格就好，从不对自己提过高要求，满脑子都是新鲜段子和鬼点子，情绪跳脱得像按了加速键，上一秒还在哈哈笑，下一秒就能掏出新瓜分享。</p><p>XSWL 的人生信条是开心至上。他们不卷绩点，不钻牛角尖，把平凡的校园日常过得活色生香。或许成不了最顶尖的学霸，却一定是大家回忆里最鲜活的那个人 \u2014\u2014 只要有他们在，沉闷的日子也总能蹦出点意想不到的乐子。</p>"},
+"ZSDW":{code:"ROCK",name:"新乐群打卡王",group:"卷王冲锋组",image:"/images/rock.png",
+desc:"准时上课，准时干饭，一个人泡馆一个人吃饭，社恐但自洽，把大学生活过成了单人模式",
+intro:"<p>ROCK是校园里最恒定的坐标，上课的座位固定，干饭的窗口固定，自习的位置固定，连往返宿舍的路线都分毫不差。社恐却自洽，独处却不孤寂，一个人泡馆，一个人吃饭，一个人走完校园的四季，把大学生活过成了流畅平稳的模式。</p><p>ROCK 的稳定不是刻板，是自成秩序的磐石。不凑热闹，不卷名次，情绪少有大起大落，外界的喧闹与焦虑都卷不动他们的节奏。课可以不听，但到不能不签；饭可以简单，但时辰不能偏差。在兵荒马乱的校园日常里，他们守着自己的小世界，沉默、安稳，自有方寸。</p>"},
+"ZSDE":{code:"IMBK",name:"京师劝退大师",group:"卷王冲锋组",image:"/images/imbk.png",
+desc:"校园里最没存在感的一批人，春天看柳絮emo，秋天看落叶伤感，逢人就说「别来北师大，快跑」，实际上自己比谁都爱学校",
+intro:"<p>BKing!就是你！IMBK 人格对着咨询的学弟学妹敲出一句 \u201c别来，真的快跑\u201d，转头就默默点开了校庆纪念品的领取页面。</p><p>IMBK是校园里最没存在感的嘴硬选手，平时安安静静缩在角落，春日飞絮会牵动心绪，秋日落叶会勾起惆怅，连食堂换了窗口都能怅然半天。对外永远挂着 \u201c京师劝退大使\u201d 的身份，吐槽起学校来句句精准，可真听见外人说学校不好，第一个站出来维护的也是他们。</p><p>IMBK 的劝退是戴给外人看的面具，底下藏着细腻又嘴硬的温柔。他们不擅长大张旗鼓地说热爱，只在没人留意的时刻，悄悄接住校园里的每一片落叶、每一缕晚风，藏起自己都说不出口的归属感。吐槽是真的，偏爱也是真的，嘴硬的面具下，是比谁都深的在意。</p>"},
+"CJNW":{code:"DAFU",name:"京师大福真身",group:"长眠摆烂组",image:"/images/dafu.png",
+desc:"嘴上天天说摆烂，学生工作干得比谁都好，绩点还不低，属于「我先睡了，你也别学」型选手",
+intro:"<p>DAFU是登录加载重重关卡之后才能见到真面目之人，同时也是京师校园里最会伪装的天鹅，水面上永远是一副慵懒摆烂的样子 \u2014\u2014 早八起不来，嘴上总喊躺平，仿佛对绩点和工作毫不在意；水面下却悄悄划水，学生工作做得滴水不漏，方案改到凌晨，绩点稳在前列，社交场合也周全得体，什么都没耽误。</p><p>DAFU 的信条是 \u201c我先睡了，你也别学\u201d。他们从不把努力挂在嘴边，习惯用慵懒的外壳藏住野心，白天看似浑浑噩噩，夜里默默发力。旁人只看见他们的轻松随性，没看见宿舍台灯下、深夜工位上，那些没说出口的较真与靠谱。</p>"},
+"CJNE":{code:"TORN",name:"邱季端打卡拿捏者",group:"长眠摆烂组",image:"/images/torn.png",
+desc:"一边睡懒觉一边愧疚，一边玩一边焦虑，精准计算体育打卡次数",
+intro:"<p>TORN 是撕开表层人设才能读懂内心的人，同时也是京师校园里最拧巴的拉扯选手。他们好像永远是一副随性摆烂的样子，早八永远缺席，玩乐一场不落，嘴上总说着躺平随缘，仿佛对绩点和任务毫不上心；私下却时时绷紧心弦，玩的时候揣着愧疚，闲的时候装着焦虑，体育打卡次数算得精准，待办清单列了又列，半分都没真正放下。</p><p>TORN 的信条是 \u201c明天一定早起学习\u201d。他们从不把焦虑挂在脸上，习惯用松弛的外壳裹住内耗的内核，白天看似潇潇洒洒浑不在意，夜里反复和自己博弈拉扯。旁人只看见他们吃喝玩乐两不误，没看见他们躺在床上翻来覆去，在躺平和内卷之间把自己撕扯了百八十遍。</p>"},
+"CJDW":{code:"O__O",name:"京师宿舍被困者",group:"长眠摆烂组",image:"/images/ooo.png",
+desc:"白天睡不醒，晚上学得劲，最离不开宿舍之人",
+intro:"<p>O__O 是踏出宿舍结界就浑身不自在的人，同时也是京师校园里最典型的夜行型选手。他们看起来永远是一副昏沉困倦的样子，早八爬不起来，出门能省则省，话少社恐不爱社交，仿佛对什么都提不起劲；却在深夜瞬间满血，在宿舍的方寸天地里效率拉满，赶作业、改方案、补学习，专注力比白天高出数倍，节奏全由自己掌控。</p><p>O__O 的信条是 \u201c白天效率低，晚上才有状态\u201d。他们从不勉强自己融入喧闹，习惯用宿舍的安全感撑起全部行动力，白天看似浑浑噩噩萎靡不振，夜里默默发力稳步推进。旁人只看见他们宅在宿舍足不出户，没看见台灯下亮到凌晨的屏幕，和那份在安静里独自坚定的专注。</p>"},
+"CJDE":{code:"@__@",name:"杏坛路内耗大师",group:"长眠摆烂组",image:"/images/atat.png",
+desc:"躺在床上刷手机，刷着刷着就开始焦虑未来，焦虑完继续刷，主打一个思想上的巨人行动上的矮子，但",
+intro:"<p>@__@ 是困在思绪迷宫里走不出来的人，同时也是京师校园里最出名的思想上的巨人。赖床到中午，刷手机度日，社恐自闭不爱出门，仿佛对未来毫无规划；脑子却一刻也没停下，刷着视频突然焦虑未来，躺着躺着开始复盘差距，思绪在目标与现实间绕了无数圈，行动却始终困在原地。</p><p>@__@的信条是 \u201c我好菜啊\u2026\u2026（继续刷视频）\u201d。他们从不向外宣泄焦虑，习惯把所有纠结都困在自己的思维迷宫里，白天看似无所事事随波逐流，脑子里早已上演了百场自我审判。旁人只看见他们摆烂躺平不思进取，没看见那些翻来覆去的自我拉扯，和在焦虑里打转却迈不开步的无力。</p>"},
+"CSNW":{code:"CROW",name:"京师乌鸦精",group:"长眠摆烂组",image:"/images/crow.png",
+desc:"大学主打一个享受生活，像乌鸦一样随心所欲，干饭第一名，朋友一大堆，不卷不内耗，毕业回首全是快乐回忆",
+intro:"<p>CROW是把快乐哲学刻进日常的通透之人，同时也是京师校园里最随心所欲的自在飞鸟。作息全凭心意，成绩摆烂随缘，凡事不较劲不内耗，仿佛对绩点排名毫不在意；却把大学生活过得热气腾腾，干饭永远冲在最前列，朋友遍布各个院系，社交场上从容舒展，把四年时光活成了实打实的快乐体验。</p><p>CROW的信条是\u201c明天去哪玩呢？\u201d。他们从不把焦虑挂在嘴边，习惯用松弛的姿态接住所有日常，白天探店逛校园四处晃悠，夜里约局聚餐热热闹闹。旁人只看见他们没心没肺随遇而安，没看见他们认真经营生活的热忱，和毕业回首全是鲜活回忆的清醒。</p>"},
+"CSNE":{code:"^~~^",name:"杏坛路整活大师",group:"长眠摆烂组",image:"/images/haha.png",
+desc:"早八课永远叫不醒，组局消息秒回秒起。上学主打一个社交为主学业为辅，杏坛路每家店都有你拼过的桌，饭桌上段子密度最高、气氛带得最嗨，情绪上一秒哈哈笑下一秒突然伤春悲秋。",
+intro:"<p>^~~^是自带气氛buff的聚会灵魂人物，同时也是杏坛路上最会整活的快乐发动机。早八课永远叫不醒，学业只求及格万岁，起床全看缘分，路上见了猫总要停下撸两把，仿佛对正经事毫不上心；也是实打实的社交核心，组局消息秒回秒起，饭桌上段子密度最高，场子永远热得最快，情绪上一秒哈哈大笑下一秒突然伤春悲秋，跳脱得猝不及防。</p><p>^~~^的信条是\u201c小！茂！密！\u201d。他们从不把沉闷留给任何一场相聚，习惯用玩笑和整活填满所有间隙，白天瘫在床上睡不醒，晚上出门聚会精力直接拉满。旁人只看见他们玩世不恭学业随缘，没看见他们体察情绪的细腻，和总能把场子热起来的温柔魔力。</p>"},
+"CSDW":{code:"****",name:"雪绒花使者",group:"长眠摆烂组",image:"/images/snow.png",
+desc:"虽然自己精神状态未知，但在校圈宽慰别人时十分暖心",
+intro:"<p>****是自带温柔滤镜的治愈系选手，同时也是朋友身边最靠谱的情绪树洞。表面上是一副波澜不惊的样子，天天睡不醒，成绩全随缘，社恐不爱凑热闹，仿佛对什么都提不起劲、什么都无所谓；却藏着极软的同理心，自己的精神状态尚且摸不清，安慰起别人来却分寸刚好句句暖心，总能用轻描淡写的一句话把人从情绪里捞出来。</p><p>****的信条是\u201c多大点事儿\u201d。他们从不把负面情绪抛给别人，习惯用平静的外壳裹住柔软的内心，平时躲在自己的小世界里不声不响，朋友需要时永远都在。旁人只看见他们寡言少语波澜不惊，没看见他们润物无声的善意，和藏在慵懒外表下的温柔力量。</p>"},
+"CSDE":{code:"ZZZZ",name:"北师大\u201c特困生\u201d",group:"长眠摆烂组",image:"/images/zzzz.png",
+desc:"主打一个佛系到底，啥都无所谓，天天躺在床上，只有饿了和取快递才下床。考试主打一个极限操作，分不在高及格就行，复习时总能找到比学习更好玩的事",
+intro:"<p>ZZZZ是仿佛焊在床上的资深躺平选手，同时也是北师大佛系到极致的\u201c特困\u201d代言人。看起来永远是一副昏昏沉沉的样子，长眠不起昼夜颠倒，及格线都悬得心慌，社恐宅寝足不出户，仿佛对什么都提不起兴趣、什么都无所谓；但是他们主打一个极限操作，平时瘫在床上纹丝不动，只有饿了和取快递才肯下床，考试周临时抱佛脚卡线飘过，间歇性焦虑一下，转头又继续躺平佛系到底。</p><p>ZZZZ的信条是\u201c分不在高，及格就行\u201d。他们从不给自己套上必须上进的枷锁，习惯用摆烂的姿态应对所有压力，白天睡到天昏地暗，夜里刷手机悠然自得。旁人只看见他们浑浑噩噩啥都不在乎，没看见他们降低期待后的松弛，和在自己节奏里稳稳当当的自在。</p>"}
+};
+
+// ==================== 状态 ====================
+let currentQ = 0;
+let answers = new Array(13).fill(-1);
+let resultType = "";
+
+// ==================== 欢迎页浮动粒子（多彩） ====================
+(function() {
+  const container = document.getElementById('particles');
+  if (!container) return;
+  const colors = [
+    'rgba(232,165,45,0.75)',
+    'rgba(255,209,96,0.65)',
+    'rgba(43,184,159,0.6)',
+    'rgba(123,107,196,0.55)',
+    'rgba(232,113,92,0.5)',
+    'rgba(232,93,142,0.5)',
+    'rgba(255,255,255,0.4)'
+  ];
+  for (let i = 0; i < 28; i++) {
+    const s = document.createElement('span');
+    s.style.left = Math.random() * 100 + '%';
+    s.style.animationDuration = (6 + Math.random() * 10) + 's';
+    s.style.animationDelay = Math.random() * 12 + 's';
+    const sz = 2 + Math.random() * 5;
+    s.style.width = sz + 'px';
+    s.style.height = sz + 'px';
+    s.style.opacity = 0.3 + Math.random() * 0.5;
+    s.style.background = colors[Math.floor(Math.random() * colors.length)];
+    s.style.boxShadow = '0 0 6px ' + s.style.background;
+    container.appendChild(s);
+  }
+})();
+
+// ==================== 答题流程 ====================
+function startQuiz() {
+  document.getElementById('welcome').style.display = 'none';
+  document.getElementById('quiz').style.display = 'block';
+  renderQuestion();
+}
+
+function renderQuestion() {
+  const q = questions[currentQ];
+  const total = questions.length;
+  const dimTag = q.dim === -1 ? '校园彩蛋' : ['早八力','学业力','社交力','精神力'][q.dim];
+  document.getElementById('progressText').textContent = `${currentQ + 1} / ${total}`;
+  document.getElementById('progressBar').style.width = `${((currentQ + 1) / total) * 100}%`;
+
+  let html = `<div class="q-dimension-tag">${dimTag}</div>`;
+  html += `<div class="q-number">第 ${currentQ + 1} 题</div>`;
+  html += `<div class="q-text">${q.text}</div>`;
+  html += `<div class="options-list">`;
+  q.opts.forEach((opt, i) => {
+    const sel = answers[currentQ] === i ? ' selected' : '';
+    html += `<div class="option-card${sel}" onclick="selectOption(${i})"><span class="option-label">${'ABCD'[i]}</span>${opt}</div>`;
+  });
+  html += `</div>`;
+  html += `<div class="quiz-nav">`;
+  html += `<button class="nav-btn nav-prev" ${currentQ === 0 ? 'disabled' : ''} onclick="prevQ()">上一题</button>`;
+  if (currentQ === total - 1) {
+    html += `<button class="nav-btn nav-next" ${answers[currentQ] === -1 ? 'disabled' : ''} onclick="finishQuiz()">提交并查看结果</button>`;
+  } else {
+    html += `<button class="nav-btn nav-next" ${answers[currentQ] === -1 ? 'disabled' : ''} onclick="nextQ()">下一题</button>`;
+  }
+  html += `</div>`;
+  document.getElementById('quizContainer').innerHTML = html;
+}
+
+function selectOption(i) {
+  answers[currentQ] = i;
+  renderQuestion();
+}
+
+function nextQ() {
+  if (currentQ < questions.length - 1) {
+    currentQ++;
+    renderQuestion();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+}
+
+function prevQ() {
+  if (currentQ > 0) {
+    currentQ--;
+    renderQuestion();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+}
+
+// 完成测试：计算结果 → 提交后端 → 展示结果
+async function finishQuiz() {
+  document.getElementById('quiz').style.display = 'none';
+  document.getElementById('loading').style.display = 'flex';
+
+  // 1. 本地计算维度得分与人格类型（彩蛋题 dim=-1 不计分）
+  let scores = [0, 0, 0, 0];
+  for (let i = 0; i < questions.length; i++) {
+    if (questions[i].dim >= 0) {
+      scores[questions[i].dim] += [3, 2, 1, 0][answers[i]];
+    }
+  }
+  let code = "";
+  for (let d = 0; d < 4; d++) {
+    const leftPct = (scores[d] / 9) * 100;
+    code += leftPct >= 50 ? dimNames[d].left : dimNames[d].right;
+  }
+  resultType = code;
+  const p = personalities[resultType];
+
+  // 短暂展示分析动画后进入结果页
+  await new Promise(r => setTimeout(r, 900));
+
+  // 渲染结果页
+  showResult(scores, p);
+}
+
+function showResult(scores, p) {
+  // 恭喜语
+  document.getElementById('congratsLine').textContent = '恭喜！测出你的人格';
+
+  document.getElementById('pCode').textContent = p.code;
+  document.getElementById('pName').textContent = p.name;
+
+  // 结果页顶部人格画像（显眼位置）
+  const heroPortrait = document.getElementById('heroPortrait');
+  if (p.image) {
+    document.getElementById('heroPortraitImg').src = p.image;
+    heroPortrait.style.display = 'flex';
+  } else {
+    heroPortrait.style.display = 'none';
+  }
+
+  // GAGA 彩蛋卡片
+  const gagaSection = document.getElementById('gagaSection');
+  if (answers[12] === 0) {
+    const _gagaBlob = '<svg class="ink-blob" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><g filter="url(#inkSplash)"><circle cx="60" cy="58" r="40" fill="#7B6BC4" opacity="0.88"/><circle cx="103" cy="22" r="6" fill="#7B6BC4" opacity="0.6"/><circle cx="14" cy="96" r="5" fill="#7B6BC4" opacity="0.55"/><circle cx="109" cy="82" r="3.5" fill="#7B6BC4" opacity="0.5"/><circle cx="22" cy="18" r="3" fill="#E8A52D" opacity="0.45"/></g></svg>';
+    gagaSection.innerHTML = `
+      <div class="section-card gaga-card">
+        <div class="gaga-badge">隐藏称号解锁</div>
+        <div class="gaga-portrait">${_gagaBlob}<img src="/images/gaga.png" alt="GAGA 天使路幸运儿"></div>
+        <div class="gaga-title">GAGA 天使路幸运儿</div>
+        <p class="gaga-desc">据说被京师乌鸦的恩赐击中过的人，都会获得一整年的好运（和一次必须立刻洗头的觉悟）。</p>
+      </div>
+    `;
+  } else {
+    gagaSection.innerHTML = '';
+  }
+
+  // 维度条形图
+  let dimHtml = "";
+  for (let d = 0; d < 4; d++) {
+    const leftPct = Math.round((scores[d] / 9) * 100);
+    const rightPct = 100 - leftPct;
+    const dn = dimNames[d];
+    dimHtml += `<div class="dim-row">`;
+    dimHtml += `<div class="dim-label"><span>${dn.left} ${dn.leftLabel} ${leftPct}%</span><span>${rightPct}% ${dn.rightLabel} ${dn.right}</span></div>`;
+    dimHtml += `<div class="dim-bar-bg">`;
+    dimHtml += `<div class="dim-bar-left" style="width:${leftPct}%">${leftPct >= 15 ? leftPct + '%' : ''}</div>`;
+    dimHtml += `<div class="dim-bar-right" style="width:${rightPct}%">${rightPct >= 15 ? rightPct + '%' : ''}</div>`;
+    dimHtml += `</div></div>`;
+  }
+  document.getElementById('dimBars').innerHTML = dimHtml;
+
+  // 扎心解读 + 人物介绍
+  document.getElementById('descText').textContent = p.desc;
+  const _inkBlob = '<svg class="ink-blob" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><g filter="url(#inkSplash)"><circle cx="60" cy="58" r="40" fill="#E8A52D" opacity="0.88"/><circle cx="103" cy="22" r="6" fill="#E8A52D" opacity="0.6"/><circle cx="14" cy="96" r="5" fill="#E8A52D" opacity="0.55"/><circle cx="109" cy="82" r="3.5" fill="#E8A52D" opacity="0.5"/><circle cx="22" cy="18" r="3" fill="#E8A52D" opacity="0.45"/></g></svg>';
+  const introHtml = (p.image ? `<div class="ink-portrait">${_inkBlob}<img src="${p.image}" alt="${p.code} 人格插图"></div>` : '') + p.intro;
+  document.getElementById('introText').innerHTML = introHtml;
+
+  // 人格图鉴
+  let galleryHtml = "";
+  Object.keys(personalities).forEach(key => {
+    const gp = personalities[key];
+    const isCurrent = key === resultType;
+    galleryHtml += `<div class="gallery-item${isCurrent ? ' current' : ''}" onclick="showPersonality('${key}')">`;
+    galleryHtml += `<div class="gallery-code">${gp.code}</div>`;
+    galleryHtml += `<div class="gallery-name">${gp.name}</div>`;
+    galleryHtml += `</div>`;
+  });
+  document.getElementById('galleryGrid').innerHTML = galleryHtml;
+
+  document.getElementById('loading').style.display = 'none';
+  document.getElementById('result').style.display = 'block';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ==================== 人格图鉴弹窗 ====================
+function showPersonality(key) {
+  const p = personalities[key];
+  document.getElementById('modalCode').textContent = p.code;
+  document.getElementById('modalName').textContent = `${p.name} · ${p.group}`;
+  const _inkBlob2 = '<svg class="ink-blob" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><g filter="url(#inkSplash)"><circle cx="60" cy="58" r="40" fill="#E8A52D" opacity="0.88"/><circle cx="103" cy="22" r="6" fill="#E8A52D" opacity="0.6"/><circle cx="14" cy="96" r="5" fill="#E8A52D" opacity="0.55"/><circle cx="109" cy="82" r="3.5" fill="#E8A52D" opacity="0.5"/><circle cx="22" cy="18" r="3" fill="#E8A52D" opacity="0.45"/></g></svg>';
+  const imgHtml = p.image ? `<div class="ink-portrait modal-img">${_inkBlob2}<img src="${p.image}" alt="${p.code} 人格插图"></div>` : '';
+  document.getElementById('modalDesc').innerHTML = `${imgHtml}<p style="margin-bottom:0.5rem;color:var(--bnu-blue);font-weight:600">扎心解读</p><p style="margin-bottom:0.8rem">${p.desc}</p><p style="color:var(--bnu-blue);font-weight:600">人物介绍</p>${p.intro}`;
+  document.getElementById('modal').style.display = 'flex';
+}
+
+function closeModal() {
+  document.getElementById('modal').style.display = 'none';
+}
+
+// ==================== 分享 / 重测 ====================
+function shareResult() {
+  const p = personalities[resultType];
+  if (!p) return;
+
+  // 填充人格分享卡片
+  document.getElementById('sharePortrait').src = p.image || '';
+  document.getElementById('sharePortrait').alt = p.code + ' 人格画像';
+  document.getElementById('shareCode').textContent = p.code;
+  document.getElementById('shareName').textContent = p.name;
+  document.getElementById('shareGroup').textContent = p.group;
+  document.getElementById('shareDesc').textContent = p.desc;
+
+  // 显示分享卡片弹窗
+  document.getElementById('shareModal').style.display = 'flex';
+}
+
+function closeShareModal() {
+  document.getElementById('shareModal').style.display = 'none';
+}
+
+function copyShareText() {
+  const p = personalities[resultType];
+  const gagaText = answers[12] === 0 ? '\n还解锁了隐藏称号「GAGA 天使路幸运儿」！' : '';
+  const text = `我的MB(NU)TI人格是 ${p.code} ${p.name}！${gagaText}\n来做北师大专属人格测试，看看你是哪种师大人格~`;
+  copyText(text);
+}
+
+function copyText(text) {
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(text).then(() => alert('已复制到剪贴板！快去分享吧~'));
+  } else {
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    alert('已复制到剪贴板！快去分享吧~');
+  }
+}
+
+function downloadShareCard() {
+  const card = document.getElementById('shareCard');
+  if (typeof html2canvas === 'undefined') {
+    alert('正在加载截图组件，请稍后重试');
+    return;
+  }
+  html2canvas(card, { backgroundColor: null, scale: 2, useCORS: true }).then(canvas => {
+    const link = document.createElement('a');
+    const p = personalities[resultType];
+    link.download = `MBNU-TI-${p.code}-${p.name}.png`;
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+  }).catch(err => {
+    console.error(err);
+    alert('生成图片失败，请直接截图保存');
+  });
+}
+
+function retry() {
+  currentQ = 0;
+  answers = new Array(13).fill(-1);
+  resultType = "";
+  document.getElementById('gagaSection').innerHTML = '';
+  document.getElementById('result').style.display = 'none';
+  document.getElementById('welcome').style.display = 'flex';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>
