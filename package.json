@@ -1,0 +1,12 @@
+{
+  "name": "mbnuti-website",
+  "version": "1.0.0",
+  "description": "北师大专属 MB(NU)TI 人格测试（纯静态网站）",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "engines": {
+    "node": ">=14"
+  }
+}
